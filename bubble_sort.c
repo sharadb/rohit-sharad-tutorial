@@ -5,7 +5,6 @@
 
 void buble_sort(int* coinBag,int size)
 {
-
 	int i,j;
 	for(i=0;i<size;i++)
 		for(j=0;j<size-i;j++)
@@ -18,11 +17,8 @@ void buble_sort(int* coinBag,int size)
 			}
 		}
 }
-
-
 /*void insertion_sort(int* coinBag,int size)
 {
-
 	int i,j;
 	int *coinBag2;
 	for(i=0;i<size;i++)
@@ -31,11 +27,6 @@ void buble_sort(int* coinBag,int size)
 
 	}
 }*/
-
-
-
-
-
 int main()
 {
 	int *coinBag;
@@ -50,5 +41,5 @@ int main()
     for(i=0;i<maxsize;i++)
 		printf("%d\t", coinBag[i]); //displaying coinBag
         printf("\n");
-
+    return 0;
 }
