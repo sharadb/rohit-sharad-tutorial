@@ -1,6 +1,6 @@
 //abcd
 #define maxsize 20
-#define k 19
+#define k 9
 #include<stdio.h>
 #include<stdlib.h>
 #include<math.h>
@@ -39,7 +39,7 @@ void canBuyOrNot(int* coinBag)
 
 int main()
 {
-	int coinBag[maxsize];
+	int *coinBag;
 	int i=0;
 	srand(time(NULL));
 	for(i=0;i<maxsize;i++)
