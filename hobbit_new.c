@@ -1,4 +1,3 @@
-//abcd
 #define maxsize 8
 #define k 9
 #include<stdio.h>
@@ -17,22 +16,15 @@ int canBuyOrNot(int * coinBag)
         if(min>coinBag[i]) { min=coinBag[i]; continue;}       
     }
     range=max-min;
-    if(min<0)
-    {
-    	coinBag2=(int*)calloc(sizeof(int),range+1);
-     	for(i=0;i<maxsize;i++)
-    	 {
-            if(coinBag2[k-coinBag[i]-min]==1)
-            		return 1;
-            else 
-            	coinBag2[coinBag[i]-min]=1;
-		 }
-		 return 0;
-    } 
-}
-
-
-
+    coinBag2=(int*)calloc(sizeof(int),range+1);
+    for(i=0;i<maxsize;i++)
+  	{
+       if ((k-coinBag[i]-min)>=0 && coinBag2[k-coinBag[i]-min]==1)  return 1;
+       else 
+       		coinBag2[coinBag[i]-min]=1;
+	}
+	return 0;
+ } 
 int main()
 {
 	int *coinBag;
@@ -43,6 +35,7 @@ int main()
 		coinBag[i]= pow(-1,(rand() % 2)) * (rand() % 15);//populating coinBag with positive and negetive numbers randomly
 	for(i=0;i<maxsize;i++)
 		printf("%d\t", coinBag[i]); //displaying coinBag
+     	printf("\n");
      	result=canBuyOrNot(coinBag);
      	if(result==1)
      		printf("\nCan Buy\n");
