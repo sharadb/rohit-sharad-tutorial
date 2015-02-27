@@ -1,64 +1,73 @@
 #include <cstdlib>
 #include <iostream>
+#include <vector>
 using namespace std;
 
-
-
-void find_min_diff(int * array)
+vector<int> find_min_diff (vector<int> vec , int size)
 {
 	// This function will find the two numbers for which the difference is minimum
 	// input is Sorted array
-	int num1 = array[0], num2 = array[1] ; 
-  int diff = num2 - num1 ;
-  for ( int i = 2; i < 5; i++ )
+  int diff =  vec[1] -  vec[0] ;
+  vector<int> new_vec;
+  new_vec.push_back( vec[0] );
+  new_vec.push_back( vec[1] );
+  for ( int i = 2; i < size; i++ )
   {
-  	if ( ( array [i] - array[i-1] ) >= diff )
+  	if ( ( vec[i] - vec[i-1] ) > diff )
   		continue;
-  	else 
+  	else if( ( vec[i] - vec[i-1] ) < diff )
   	{
-  			diff = array [i] - array[i-1];
-  			num1 = array[i - 1];
-  			num2 = array[i];
+  			diff = vec[i] - vec[i-1];
+  			new_vec.clear();
+  			new_vec.push_back( vec[i - 1] );
+  			new_vec.push_back( vec[i] );
   	}  	 	
+  	else
+  	{
+  		new_vec.push_back( vec[i - 1] );
+  		new_vec.push_back( vec[i] );
+  	}
   }
-  cout << num1 << endl;
-  cout << num2 << endl;
+  return new_vec;
 }
-
-
-
-void quicksort(int * array, int start, int end)
+void quicksort(vector<int> &vec, int start, int end)
 {
 	if( start >= end )
 		return;
-	int pivot = array[start];
+	int pivot = vec[start];
  	int i = start, j = end;
   while(i < j)
   {
-	 	while ( array[i] <= pivot && i < end )
+	 	while ( vec[i] <= pivot && i < end )
 	 		i++ ;
-	 	while ( array[j] >= pivot && j > start )
+	 	while ( vec[j] >= pivot && j > start )
 	 		j-- ;
 	 	if( i < j)
 	 	{
-	 		int temp = array[i];
-	 		array[i] = array[j];
-	 		array[j] = temp;
+	 		int temp = vec[i];
+	 		vec[i] = vec[j];
+	 		vec[j] = temp;
 	 	}
 	 else
 	 {
-	 	int temp = array[j];
-	 	array[j] = pivot;
-	  array[start] = temp;
+	 	int temp = vec[j];
+	 	vec[j] = pivot;
+	  vec[start] = temp;
 	 }
 	}
- quicksort(array, start, j - 1);
- quicksort(array, j + 1 , end);
+ quicksort( vec, start, j - 1);
+ quicksort( vec, j + 1 , end);
 }
 int main()
 {
-  int array[5] = {1, 1, 10, -11, 13} ;
-  quicksort ( array, 0, 4 );
-  find_min_diff( array );
+  int size = 7;
+  int initVector[] = {113, 213, 10, 11, 13, 5, 6};
+  vector<int> vec(initVector,initVector + size);
+  quicksort ( vec, 0, 6 );
+  //for ( int i = 0; i < size; i++ )
+    //cout << vec[i] << endl ;
+  vector<int> result = find_min_diff( vec, size);
+  for (int i = 0; i < result.size(); i++)
+    cout << result[i] << endl ;
   return 0;
 }
